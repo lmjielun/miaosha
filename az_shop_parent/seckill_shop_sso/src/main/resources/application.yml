@@ -1,0 +1,56 @@
+
+server:
+  port: 9091
+  servlet:
+    context-path: /
+# \u5E94\u7528\u540D\u79F0
+spring:
+  application:
+    name: sso-service
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/az_shop
+    username: root
+    password: root
+  redis:    # \u914D\u7F6Eredis\u53C2\u6570
+    database: 0
+    password:
+    host: 127.0.0.1
+    port: 6379
+    lettuce:
+      pool:
+        max-active: 200
+        pool.max-wait: -1
+        max-idle: 10
+        min-idle: 0
+
+
+
+# mybatis \u522B\u540D\u626B\u63CF
+#mybatis.type-aliases-package=com.yzit.demo.dao
+# mapper.xml\u6587\u4EF6\u4F4D\u7F6E,\u5982\u679C\u6CA1\u6709\u6620\u5C04\u6587\u4EF6\uFF0C\u8BF7\u6CE8\u91CA\u6389
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+
+
+#pagehelper
+pagehelper:
+  helper-dialect: mysql
+  params: countSql
+  reasonable: true
+  support-methods-arguments: true
+#\u6CE8\u518C\u4E2D\u5FC3\u914D\u7F6E
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
+  instance:
+    lease-renewal-interval-in-seconds: 5 # \u6BCF\u96945\u79D2\u53D1\u9001\u4E00\u6B21\u5FC3\u8DF3
+    lease-expiration-duration-in-seconds: 10 # 10\u79D2\u4E0D\u53D1\u9001\u5C31\u8FC7\u671F
+    prefer-ip-address: true
+    ip-address: 127.0.0.1
+    instance-id: ${spring.application.name}:${server.port}
+
+
+
+

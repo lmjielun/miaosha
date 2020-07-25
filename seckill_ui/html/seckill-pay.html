@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>秒杀支付</title>
+    <script src="../static/js/plugins/vue/vue.min.js"></script>
+    <script src="../static/js/plugins/vue/axios.min.js"></script>
+    <script src="../static/js/plugins/vue/qs.js"></script>
+    <script src="../static/js/plugins/elementUI/index.js"></script>
+    <link rel="stylesheet" href="../static/js/plugins/elementUI/index.css">
+    <script src="../static/js/plugins/jquery/jquery-3.2.1.min.js"></script>
+    <script src="../static/js/plugins/jquery/jquery.cookie.js"></script>
+</head>
+<body>
+
+<div id="app">
+    <el-form  :model="orderForm" label-width="80px">
+        <el-form-item label="订单编号">
+            <el-input v-model="orderForm.id"></el-input>
+        </el-form-item>
+        <el-form-item label="订单名称">
+            <el-input v-model="orderForm.subject"></el-input>
+        </el-form-item>
+        <el-form-item label="订单金额">
+            <el-input v-model="orderForm.money"></el-input>
+        </el-form-item>
+        <el-form-item label="订单描述">
+            <el-input v-model="orderForm.body"></el-input>
+        </el-form-item>
+
+        <el-form-item>
+            <el-button type="primary" @click="toPay">马上支付</el-button>
+            <el-button>取消</el-button>
+        </el-form-item>
+    </el-form>
+
+    <br/>
+    payForm =={{payForm}}
+</div>
+
+<script>
+    // 1 接受从秒杀页面传递过来的参数，调用接口显示秒杀订单信息
+    //2 点击支付按钮，调用支付接口，跳转到支付页面
+    var USER_TOKEN =$.cookie('USER_TOKEN');
+    var  baseUrl = "http://localhost:10010/api";//zuul的路由地址
+    var app = new Vue({
+        el:"#app",
+        data:{
+            // 用户
+            user:{},
+            // 订单提交表单
+            orderForm:{},
+            // 支付表单对象
+            payForm:{},
+
+        },
+        created: function () {
+            // 加载秒杀订单
+            this.loadOrder();
+        },
+        methods:{
+            // 加载订单信息，根据cookie用户的token获取订单信息
+            loadOrder:function () {
+                // 根据token获取用户的订单信息
+                if(USER_TOKEN != null && USER_TOKEN != ""){
+                    axios.get(baseUrl+"/sso/user/token/"+USER_TOKEN).then(function(reason){
+                        // 将获取到的数据绑定到变量中，并页面显示
+                        let json  =reason.data;//接受结果信息，为表单对象赋值
+                        if(json.success) {  //true 表示用户存在
+                            //获取用户对象，为user属性赋值
+                            app.user = json.obj;
+
+                            //根据用户编号，查询用户的订单信息
+                            //根据商品编号获取秒杀商品对象
+                            axios.get(baseUrl+'/item/seckillOrder/order/'+app.user.id).then(function (response) {
+                                // 将获取到的订单信息赋值给orderForm
+                                app.orderForm = response.data;
+                            });
+                        }
+                    });
+                }else{
+                    window.location.href="login.html"
+                }
+            },
+
+            //支付
+            toPay:function () {
+                /*赋值信息*/
+                app.payForm= {"orderNo":app.orderForm.id,
+                              "subject": app.orderForm.subject,
+                              "amount":  app.orderForm.money,
+                              "body":  app.orderForm.body};
+
+                // 将提交订单信息转为url地址字符串参数
+                let   urlStr = Qs.stringify(this.payForm);
+
+                // 然后发送支付请求
+                axios.get(baseUrl+"/pay/alipay/pay?"+urlStr).then(function(reason){
+                    //  接收返回的信息
+                    console.log("支付返回结果信息："+reason.data.obj);
+                    // 返回的信息是html代码，接收下
+                    const div = document.createElement('div');
+                    /!* 此处form就是后台返回接收到的数据 *!/
+                    div.innerHTML = reason.data.obj;
+                    document.body.appendChild(div)
+                    console.log("body代码："+document.body.innerHTML);
+                    document.forms[1].submit();
+
+                    /* alert(document.getElementsByName("punchout_form"));
+                     let punchout_form  = document.getElementsByName("punchout_form");
+                     punchout_form.submit;*/
+
+                }).catch(function (reason) {
+                    alert(reason);
+                });
+            }
+
+        }
+    });
+
+</script>
+</body>
+</html>

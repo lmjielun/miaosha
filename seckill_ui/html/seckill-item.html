@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
+	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+	<title>秒杀详细页</title>
+	<link rel="icon" href="/assets/img/favicon.ico">
+	<link rel="stylesheet" type="text/css" href="../static/css/webbase.css">
+	<link rel="stylesheet" type="text/css" href="../static/css/pages-zoom.css">
+	<link rel="stylesheet" type="text/css" href="../static/css/pages-seckill-item.css">
+	<link rel="stylesheet" type="text/css" href="../static/css/widget-cartPanelView.css">
+
+
+
+</head>
+
+<body>
+<!-- 头部栏位 -->
+<!--页面顶部-->
+<script type="text/javascript" src="../static/js/plugins/jquery/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function(){
+        $("#service").hover(function(){
+            $(".service").show();
+        },function(){
+            $(".service").hide();
+        });
+        $("#shopcar").hover(function(){
+            $("#shopcarlist").show();
+        },function(){
+            $("#shopcarlist").hide();
+        });
+
+    })
+</script>
+<script type="text/javascript" src="../static/js/plugins/widget/cartPanelView.js"></script>
+<script type="text/javascript" src="../static/js/model/cartModel.js"></script>
+<script type="text/javascript" src="../static/js/czFunction.js"></script>
+<script type="text/javascript" src="../static/js/jquery.easing/jquery.easing.min.js"></script>
+<script type="text/javascript" src="../static/js/plugins/sui/sui.min.js"></script>
+<script type="text/javascript" src="../static/js/plugins/jquery.jqzoom/jquery.jqzoom.js"></script>
+<script type="text/javascript" src="../static/js/plugins/jquery.jqzoom/zoom.js"></script>
+<script type="text/javascript" src="../static/js/plugins/jquery/jquery.cookie.js"></script>
+
+<script type="text/javascript">
+    $(function(){
+        $("ul.btn-choose li a.btn-xlarge").click(function(){
+            alert("钻中");
+        });
+        $("#star").click(function(){
+            alert("关注成功");
+        })
+    })
+</script>
+</body>
+<!--商品信息总-->
+<div class="py-container" id="app" >
+	<!--{{seckillGoods}}<br>
+	{{goodsId}}-->
+	<div id="item" >
+		<div class="crumb-wrap">
+			<ul class="sui-breadcrumb">
+			</ul>
+		</div>
+		<!--商品信息开始-->
+		<div class="product-info">
+			<div class="fl preview-wrap">
+				<!--放大镜效果-->
+				<div class="zoom">
+					<!--默认第一个预览-->
+					<div id="preview" class="spec-preview">
+						<span class="jqzoom"><img jqimg="../static/img/_/b1.png" src="../static/img/_/s1.png" /></span>
+					</div>
+				</div>
+
+			</div>
+			<div class="fr itemInfo-wrap">
+				<div class="sku-name">
+					<!--商品标题-->
+					<h4>{{seckillGoods.title}}</h4>
+				</div>
+				<div class="news" style="background-color: red">
+					<span><img src="../static/img/_/clock.png"/>品优秒杀</span>
+					<!--结束时间01:56:78-->
+					<span class="overtime">距离结束：{{today}}</span>
+				</div>
+				<div class="summary">
+					<div class="summary-wrap">
+						<div class="fl title">
+							<i>秒杀价</i>
+						</div>
+						<div class="fl price">
+							<i>¥</i>
+							<!--秒杀价格-->
+							<em>{{seckillGoods.costPrice}}.00</em>
+							<!--原价-->
+							<span>原价：{{seckillGoods.price}}.00</span>
+						</div>
+						<!--剩余库存-->
+						<div class="fr remark">
+							剩余库存：{{seckillGoods.stockCount}}
+						</div>
+					</div>
+					<div class="summary-wrap">
+						<div class="fl title">
+							<i>促　　销</i>
+						</div>
+						<div class="fl fix-width">
+							<i class="red-bg">加价购</i>
+							<em class="t-gray">满999.00另加20.00元，或满1999.00另加30.00元，或满2999.00另加40.00元，即可在购物车换购热销商品</em>
+						</div>
+					</div>
+				</div>
+				<div class="support">
+					<div class="summary-wrap">
+						<div class="fl title">
+							<i>支　　持</i>
+						</div>
+						<div class="fl fix-width">
+							<em class="t-gray">以旧换新，闲置手机回收  4G套餐超值抢  礼品购</em>
+						</div>
+					</div>
+					<div class="summary-wrap">
+						<div class="fl title">
+							<i>配 送 至</i>
+						</div>
+						<div class="fl fix-width">
+							<em class="t-gray">收件人： 联系人：</em>
+						</div>
+					</div>
+				</div>
+				<div class="clearfix choose">
+
+
+					<div class="summary-wrap">
+						<div class="fl title">
+
+						</div>
+						<div class="fl">
+							<ul class="btn-choose unstyled">
+								<li>
+									<!--href="cart.html"-->
+									<a  @click="checkLogin(seckillGoods.id)" class="sui-btn  btn-danger addshopcar">立即抢购</a>
+									<a  @click="queryStatusFN()" href="javascript:void(0)">查询订单状态</a>
+									{{msg}}
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--商品信息开始-->
+		<!--product-detail-->
+		<div class="clearfix product-detail">
+			<div class="fr detail">
+				<div class="tab-main intro">
+					<ul class="sui-nav nav-tabs tab-wraped">
+						<li class="active">
+							<a href="#one" data-toggle="tab">
+								<span>商品介绍</span>
+							</a>
+						</li>
+						<li>
+							<a href="#two" data-toggle="tab">
+								<span>规格与包装</span>
+							</a>
+						</li>
+						<li>
+							<a href="#three" data-toggle="tab">
+								<span>售后保障</span>
+							</a>
+						</li>
+						<li>
+							<a href="#four" data-toggle="tab">
+								<span>商品评价</span>
+							</a>
+						</li>
+						<li>
+							<a href="#five" data-toggle="tab">
+								<span>手机社区</span>
+							</a>
+						</li>
+					</ul>
+					<div class="clearfix"></div>
+					<div class="tab-content tab-wraped">
+						<div id="one" class="tab-pane active">
+							<ul class="goods-intro unstyled">
+								<li>分辨率：1920*1080(FHD)</li>
+								<li>后置摄像头：1200万像素</li>
+								<li>前置摄像头：500万像素</li>
+								<li>核 数：其他</li>
+								<li>频 率：以官网信息为准</li>
+								<li>品牌： Apple</li>
+								<li>商品名称：APPLEiPhone 6s Plus</li>
+								<li>商品编号：1861098</li>
+								<li>商品毛重：0.51kg</li>
+								<li>商品产地：中国大陆</li>
+								<li>热点：指纹识别，Apple Pay，金属机身，拍照神器</li>
+								<li>系统：苹果（IOS）</li>
+								<li>像素：1000-1600万</li>
+								<li>机身内存：64GB</li>
+							</ul>
+							<div class="intro-detail">
+								<img src="img/_/intro01.png" />
+								<img src="img/_/intro02.png" />
+								<img src="img/_/intro03.png" />
+							</div>
+						</div>
+						<div id="two" class="tab-pane">
+							<p>规格与包装</p>
+						</div>
+						<div id="three" class="tab-pane">
+							<p>售后保障</p>
+						</div>
+						<div id="four" class="tab-pane">
+							<p>商品评价</p>
+						</div>
+						<div id="five" class="tab-pane">
+							<p>手机社区</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 底部栏位 -->
+<!--页面底部-->
+<!--页面底部END-->
+<!--侧栏面板开始-->
+<div class="J-global-toolbar">
+	<div class="toolbar-wrap J-wrap">
+		<div class="toolbar">
+			<div class="toolbar-panels J-panel">
+
+				<!-- 购物车 -->
+				<div style="visibility: hidden;" class="J-content toolbar-panel tbar-panel-cart toolbar-animate-out">
+					<h3 class="tbar-panel-header J-panel-header">
+						<a href="" class="title"><i></i><em class="title">购物车</em></a>
+						<span class="close-panel J-close" onclick="cartPanelView.tbar_panel_close('cart');" ></span>
+					</h3>
+					<div class="tbar-panel-main">
+						<div class="tbar-panel-content J-panel-content">
+							<div id="J-cart-tips" class="tbar-tipbox hide">
+								<div class="tip-inner">
+									<span class="tip-text">还没有登录，登录后商品将被保存</span>
+									<a href="#none" class="tip-btn J-login">登录</a>
+								</div>
+							</div>
+							<div id="J-cart-render">
+								<!-- 列表 -->
+								<div id="cart-list" class="tbar-cart-list">
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- 小计 -->
+					<div id="cart-footer" class="tbar-panel-footer J-panel-footer">
+						<div class="tbar-checkout">
+							<div class="jtc-number"> <strong class="J-count" id="cart-number">0</strong>件商品 </div>
+							<div class="jtc-sum"> 共计：<strong class="J-total" id="cart-sum">¥0</strong> </div>
+							<a class="jtc-btn J-btn" href="#none" target="_blank">去购物车结算</a>
+						</div>
+					</div>
+				</div>
+
+				<!-- 我的关注 -->
+				<div style="visibility: hidden;" data-name="follow" class="J-content toolbar-panel tbar-panel-follow">
+					<h3 class="tbar-panel-header J-panel-header">
+						<a href="#" target="_blank" class="title"> <i></i> <em class="title">我的关注</em> </a>
+						<span class="close-panel J-close" onclick="cartPanelView.tbar_panel_close('follow');"></span>
+					</h3>
+					<div class="tbar-panel-main">
+						<div class="tbar-panel-content J-panel-content">
+							<div class="tbar-tipbox2">
+								<div class="tip-inner"> <i class="i-loading"></i> </div>
+							</div>
+						</div>
+					</div>
+					<div class="tbar-panel-footer J-panel-footer"></div>
+				</div>
+
+				<!-- 我的足迹 -->
+				<div style="visibility: hidden;" class="J-content toolbar-panel tbar-panel-history toolbar-animate-in">
+					<h3 class="tbar-panel-header J-panel-header">
+						<a href="#" target="_blank" class="title"> <i></i> <em class="title">我的足迹</em> </a>
+						<span class="close-panel J-close" onclick="cartPanelView.tbar_panel_close('history');"></span>
+					</h3>
+					<div class="tbar-panel-main">
+						<div class="tbar-panel-content J-panel-content">
+							<div class="jt-history-wrap">
+								<ul>
+									<!--<li class="jth-item">
+										<a href="#" class="img-wrap"> <img src=".portal/img/like_03.png" height="100" width="100" /> </a>
+										<a class="add-cart-button" href="#" target="_blank">加入购物车</a>
+										<a href="#" target="_blank" class="price">￥498.00</a>
+									</li>
+									<li class="jth-item">
+										<a href="#" class="img-wrap"> <img src="portal/img/like_02.png" height="100" width="100" /></a>
+										<a class="add-cart-button" href="#" target="_blank">加入购物车</a>
+										<a href="#" target="_blank" class="price">￥498.00</a>
+									</li>-->
+								</ul>
+								<a href="#" class="history-bottom-more" target="_blank">查看更多足迹商品 &gt;&gt;</a>
+							</div>
+						</div>
+					</div>
+					<div class="tbar-panel-footer J-panel-footer"></div>
+				</div>
+
+			</div>
+
+			<div class="toolbar-header"></div>
+
+			<!-- 侧栏按钮 -->
+			<div class="toolbar-tabs J-tab">
+				<div onclick="cartPanelView.tabItemClick('cart')" class="toolbar-tab tbar-tab-cart" data="购物车" tag="cart" >
+					<i class="tab-ico"></i>
+					<em class="tab-text"></em>
+					<span class="tab-sub J-count " id="tab-sub-cart-count">0</span>
+				</div>
+				<div onclick="cartPanelView.tabItemClick('follow')" class="toolbar-tab tbar-tab-follow" data="我的关注" tag="follow" >
+					<i class="tab-ico"></i>
+					<em class="tab-text"></em>
+					<span class="tab-sub J-count hide">0</span>
+				</div>
+				<div onclick="cartPanelView.tabItemClick('history')" class="toolbar-tab tbar-tab-history" data="我的足迹" tag="history" >
+					<i class="tab-ico"></i>
+					<em class="tab-text"></em>
+					<span class="tab-sub J-count hide">0</span>
+				</div>
+			</div>
+
+			<div class="toolbar-footer">
+				<div class="toolbar-tab tbar-tab-top" > <a href="#"> <i class="tab-ico  "></i> <em class="footer-tab-text">顶部</em> </a> </div>
+				<div class="toolbar-tab tbar-tab-feedback" > <a href="#" target="_blank"> <i class="tab-ico"></i> <em class="footer-tab-text ">反馈</em> </a> </div>
+			</div>
+
+			<div class="toolbar-mini"></div>
+
+		</div>
+
+		<div id="J-toolbar-load-hook"></div>
+
+	</div>
+</div>
+<!--购物车单元格 模板-->
+<script type="text/template" id="tbar-cart-item-template">
+	<div class="tbar-cart-item" >
+		<div class="jtc-item-promo">
+			<em class="promo-tag promo-mz">满赠<i class="arrow"></i></em>
+			<div class="promo-text">已购满600元，您可领赠品</div>
+		</div>
+		<div class="jtc-item-goods">
+			<span class="p-img"><a href="#" target="_blank"><img src="{2}" alt="{1}" height="50" width="50" /></a></span>
+			<div class="p-name">
+				<a href="#">{1}</a>
+			</div>
+			<div class="p-price"><strong>¥{3}</strong>×{4} </div>
+			<a href="#none" class="p-del J-del">删除</a>
+		</div>
+	</div>
+</script>
+<!--侧栏面板结束-->
+
+<script src="../static/js/plugins/vue/vue.min.js"></script>
+<script src="../static/js/plugins/vue/axios.min.js"></script>
+<script src="../static/js/plugins/util.js"></script>
+<script src="../static/js/plugins/moment.js"></script>
+<script src="../static/js/plugins/moment.js"></script>
+<script>
+    var baseUrl = "http://localhost:10010/api/item/";
+    var loginUrl = "http://localhost:10010/api/sso/";
+    var USER_TOKEN =$.cookie('USER_TOKEN');
+    var app = new Vue({
+        el:"#app",
+        data:{
+            /*秒杀商品对象*/
+            seckillGoods:{},
+			/*秒杀对象Id*/
+			goodsId:0,
+			today :"",
+			user:{},
+            queryStatus:{},// 秒杀订单状态
+            msg:"",// 消息
+        },
+        created: function (){
+            this.loadData();
+        },
+        methods: {
+            /*加载当前秒杀对象*/
+            loadData:function () {
+                /*先获取到 seckill-index.html页面传递过来的seckillGoods对象的id，
+                 * seckill-index.html使用什么参数名传递值，那么这边就用什么参数名接收值
+                 * 将接收到的值，赋值给当前vue对象的goodsId属性 */
+                this.goodsId = $.parseJSON(getQueryString("seckillGoods"));
+
+               /*根据当前vue对象的goodsId发送请求，获取秒杀对象*/
+                axios.get(baseUrl+'/seckill/'+this.goodsId).then(function (response) {
+                    //将数据绑定到变量中，并页面显示
+                    app.seckillGoods = response.data;
+                });
+            },
+
+            /*计算时间*/
+            createdTime: function() {
+                /*获取当前时间*/
+                let currentTime = new Date().getTime();
+                //alert("当前时间毫秒值：" + currentTime)
+
+                /*获取结束时间*/
+                let endTime = Date.parse(app.seckillGoods.endTime)
+                //alert("结束时间毫秒值："+endTime)
+
+                /*当前时间 - 结束时间 / 1000  转换为int*/
+                let t = parseInt((endTime - currentTime)/1000)
+                //alert(t)
+
+                /*得到剩余天数*/
+                let d = parseInt(t / (24*60*60))
+                d = app.addZero(d)
+                //alert("天："+d)
+                /*得到小时数*/
+                let h = parseInt(t / (60*60)%24)
+                h = app.addZero(h)
+                //alert("小时："+h)
+                /*得到分*/
+                let m = parseInt(t / 60 % 60)
+                m = app.addZero(m)
+                //alert("分钟："+m)
+                /*得到秒*/
+                let s = parseInt(t % 60)
+                s = app.addZero(s)
+                //alert("秒："+s)
+                app.today = d + "天" + h + "小时" + m +"分钟" + s + "秒"
+
+                if (t <= 0) {
+                    app.today = "活动已结束";
+                    return;
+                }
+            },
+            /*时间补0操作*/
+            addZero:function (i) {
+                //setTimeout(app.createdTime, 1000);
+                return i < 10 ? "0" + i: i + "";
+            },
+
+			/*查询订单状态*/
+            queryStatusFN:function () {
+                alert("执行queryStatusFN")
+                //120秒查询抢购信息
+                let count=120;
+                /*定时查询*/
+                let queryClock = window.setInterval(function () {
+
+					// 时间递减
+					count--;
+					// 发送请求，获取订单状态
+					axios.get(baseUrl + "seckillOrder/queryStatus/"+app.user.id).then(function (value) {
+                        app.queryStatus = value.data.status;
+                        console.log(value.data.status)
+                        //alert(value.data)
+                        if(app.queryStatus == 1){
+							app.msg = "正在排队..."+count; // 如果状态为1，正在排队，count为递减时间
+						}
+						if(app.queryStatus == 2){
+							app.msg = "抢单成功，即将进入支付"; // 状态为2，抢单成功，即将支付
+                            window.location.href="seckill-pay.html";
+						}
+                        if(app.queryStatus == 3){
+                            app.msg = "支付超时";
+                        }
+                        if(app.queryStatus == 4){
+                            app.msg = "抢单失败，稍后在试";
+                            // 停止查询，不然会耗费资源
+							window.clearInterval(queryClock)
+                        }
+                    })
+                },1000) // 1000Ms 毫秒执行一次
+            },
+
+            /*检查用户是否登录*/
+            checkLogin:function (goodsId) {
+                //alert(USER_TOKEN)
+                if(USER_TOKEN != null && USER_TOKEN != "" ){
+                    // 到sso单点登录 根据token查询用户，并给用户赋值
+                    axios.get(loginUrl + "user/token/" + USER_TOKEN).then(function (value) {
+                        if(value.data.success){ // 根据token查询结果成功
+                            // 给vue的用户赋值
+                            app.user = value.data.obj;
+                            // 调用后台，订单接口下单
+                            //alert("调用接口下单")
+                            axios.get(baseUrl + "seckillOrder/addOrder?userId="+app.user.id + "&goodsId="+goodsId).then(function (res) {
+                                if(res.data.success){
+                                    alert("下单成功")
+                                    // 调用查询订单状态
+                                    app.queryStatusFN();
+                                    // 刷新页面
+									app.loadData();
+                                   alert( app.seckillGoods.stockCount)
+                                }else{
+                                    alert("下单失败")
+									alert(res.data.message)
+                                    app.loadData();
+                                }
+                            })
+                        }else{
+                            alert("根据token查询用户失败")
+                            location.href="login.html"
+                        }
+                    })
+                    // 同时 携带用户的id 和 用户的id 创建订单，发送axios请求
+                }else {
+                    alert("跳转到登录页面")
+                    location.href="login.html"
+                }
+            },
+        }
+    })
+</script>
+
+<script>
+    //js定时器每个1s执行一次
+    var int=window.setInterval("createdTime()",1000);
+    function createdTime() {
+        app.createdTime();//每隔1s计算结束时间
+    }
+</script>
+
+
+</html>

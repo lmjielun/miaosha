@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yzit.shop.dao.UserDao" > 
+<!-- Result Map-->
+<resultMap id="BaseResultMap" type="com.yzit.shop.entity.User" >
+    	<result column="id" property="id"/>
+    	<result column="username" property="username"/>
+    	<result column="password" property="password"/>
+    	<result column="phone" property="phone"/>
+    	<result column="email" property="email"/>
+    	<result column="created" property="created"/>
+    	<result column="updated" property="updated"/>
+</resultMap>
+<!-- $!{tableName} table all fields -->
+<sql id="Base_Column_List" >
+	 id,username,password,phone,email,created,updated
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="id != null" >
+	    and id = #{id}
+	</if>
+	<if test="username != null and username != ''" >
+	    and username = #{username}
+	</if>
+	<if test="password != null and password != ''" >
+	    and password = #{password}
+	</if>
+	<if test="phone != null and phone != ''" >
+	    and phone = #{phone}
+	</if>
+	<if test="email != null and email != ''" >
+	    and email = #{email}
+	</if>
+	<if test="created != null" >
+	    and created = #{created}
+	</if>
+	<if test="updated != null" >
+	    and updated = #{updated}
+	</if>
+</trim>
+</sql>
+
+<select id="doLogin" parameterType="com.yzit.shop.entity.User" resultMap="BaseResultMap">
+	select
+	*
+	from tb_user
+	where username = #{username} and password = #{password}
+</select>
+
+
+<!-- 查询用户表列表 -->
+<select id="findByList" resultMap="BaseResultMap"  parameterType="com.yzit.shop.entity.User">
+	select
+	<include refid="Base_Column_List"/>
+	from tb_user
+	<include refid="Example_Where_Clause"/>
+	<!--  limit  #{startIndex} ,#{pageSize} -->
+</select>
+
+<!-- 插入记录 -->
+<insert id="save" parameterType="com.yzit.shop.entity.User" >
+  insert into tb_user(id,username,password,phone,email,created,updated)
+ values(#{id},#{username},#{password},#{phone},#{email},#{created},#{updated})
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="com.yzit.shop.entity.User" >
+  update tb_user set username=#{username},password=#{password},phone=#{phone},email=#{email},created=#{created},updated=#{updated} where id=#{id}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="com.yzit.shop.entity.User" >
+	update tb_user set 
+	<trim  suffixOverrides="," >
+	<if test="username != null  and username != '' ">
+		username=#{username},
+	</if>
+	<if test="password != null  and password != '' ">
+		password=#{password},
+	</if>
+	<if test="phone != null  and phone != '' ">
+		phone=#{phone},
+	</if>
+	<if test="email != null  and email != '' ">
+		email=#{email},
+	</if>
+	<if test="created != null  ">
+		created=#{created},
+	</if>
+	<if test="updated != null  ">
+		updated=#{updated},
+	</if>
+	</trim> where id=#{id}
+	
+	
+	
+</update>
+
+<!-- 删除记录 -->
+<delete id="delById" parameterType="java.lang.Long">
+	delete from tb_user where  id =#{id}
+</delete>
+
+<!-- 根据id查询 用户表 -->
+<select id="findById"  resultMap="BaseResultMap" parameterType="java.lang.Long">
+	select <include refid="Base_Column_List"/>
+	from tb_user  where  id = #{id}
+</select>
+
+<!-- 检索所有的记录 -->
+<select id="findAll"  resultMap="BaseResultMap" >
+	select 
+	<include refid="Base_Column_List"/>
+	from tb_user 
+</select>
+  	
+
+  	
+</mapper>   

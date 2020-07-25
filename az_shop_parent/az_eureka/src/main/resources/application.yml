@@ -1,0 +1,22 @@
+# \u7AEF\u53E3\u53F7\u8BBE\u7F6E
+server:
+  port: 10086
+
+# \u5728Eureka\u91CC\u5E94\u7528\u540D\u79F0
+spring:
+  application:
+    name: az-eureka
+
+# Eureka\u8FDE\u63A5\u914D\u7F6E
+eureka:
+  client:
+    # \u662F\u5426\u5C06\u81EA\u5DF1\u4E5F\u6CE8\u518C\u5230Eureka
+    fetch-registry: false
+    # \u662F\u5426\u62C9\u53D6\u5176\u4ED6\u670D\u52A1\u4FE1\u606F
+    register-with-eureka: false
+    # Eureka\u6CE8\u518C\u7684\u5730\u5740\uFF0C\u53EF\u4EE5\u81EA\u5DF1\u6CE8\u518C\u81EA\u5DF1\uFF0C\u73B0\u5728\u662F\u81EA\u5DF1\u7684\u5730\u5740\uFF0C\u5982\u679C\u662F\u96C6\u7FA4\uFF0C\u9700\u8981\u52A0\u4E0A\u5176\u5B83Server\u7684\u5730\u5740\u3002
+    service-url:
+      defaultZone: http://127.0.0.1:${server.port}/eureka
+  server:
+    enable-self-preservation: false # \u5173\u95ED\u81EA\u6211\u4FDD\u62A4
+    eviction-interval-timer-in-ms: 5000 # \u6BCF\u96945\u79D2\u8FDB\u884C\u4E00\u6B21\u670D\u52A1\u5217\u8868\u6E05\u7406

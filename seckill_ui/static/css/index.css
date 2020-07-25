@@ -1,0 +1,156 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    height: 100%;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.index-box .el-container {
+    height: 100%;
+}
+
+.index-box .el-dialog .el-form-item{
+  width: 90%;
+}
+
+.index-box .el-main {
+    height: 100%;
+}
+
+.index-box .el-header {
+    background-color: #20222A;
+}
+
+.index-box .el-aside {
+    background-color: #20222A;
+    min-height: 100%;
+    /*max-width: 250px;*/
+}
+.index-box .el-aside .logo {
+    background-color: #20222A;
+    color: rgba(255,255,255,.8);
+    text-align: center;
+    height: 60px;
+    padding-top: 16px;
+    font-size: 16px;
+    box-sizing: border-box;
+    border-bottom: 1px solid gray;
+}
+.index-box .el-header {
+    border-bottom: 1px solid #f6f6f6;
+    box-sizing: border-box;
+    background-color: #fff;
+    line-height: 60px;
+}
+
+.el-menu {
+    border: none;
+}
+.btn-tool {
+    border: none;
+    background: transparent;
+    font-size: 18px;
+    padding: 5px 10px;
+    cursor: pointer;
+    outline: none;
+    text-align: left;
+}
+.user-name {
+    margin-left: 20px;
+}
+
+.main-box {
+    display: -webkit-box; /* 老版本语法: Safari, iOS, Android browser, older WebKit browsers. */
+    display: -moz-box; /* 老版本语法: Firefox (buggy) */
+    display: -ms-flexbox; /* 混合版本语法: IE 10 */
+    display: -webkit-flex; /* 新版本语法: Chrome 21+ */
+    display: flex; /* 新版本语法: Opera 12.1, Firefox 22+ */
+}
+
+.main-flex-grow {
+    -webkit-box-flex: 3.0;
+    -moz-flex-grow: 3;
+    -webkit-flex-grow: 3;
+    flex-grow: 3;
+    overflow-y: scroll;
+}
+
+.el-tree-node__label {
+  font-size: 14px;
+  padding: 0 0 0 5px;
+}
+
+.header-nav-left {
+  width: 30px;
+  font-size: 16px;
+  float: left;
+  cursor: pointer;
+  font-weight: 300;
+}
+
+.header-menu-left {
+  width: 380px;
+  float: left;
+  margin-left: 10px;
+  font-size: 16px;
+  height: 20px;
+}
+
+.header-menu-left .el-menu-item {
+  font-size: 12px;
+  color: #303133;
+  padding: 0 10px;
+  cursor: pointer;
+  -webkit-transition: border-color .3s, background-color .3s, color .3s;
+  transition: border-color .3s, background-color .3s, color .3s;
+  box-sizing: border-box;
+}
+
+.el-menu.el-menu--horizontal {
+  border: none;
+}
+
+.el-menu--horizontal > .el-menu-item.is-active {
+  border: none;
+}
+
+.el-menu--horizontal > .el-menu-item {
+  height: 30px;
+  border: none;
+}
+
+.index-box .el-tabs__item {
+  color: #ccc;
+  font-size: 13px;
+}
+
+.index-box .el-tabs__item .el-icon-close {
+  visibility: hidden;
+}
+
+.index-box .el-tabs__item:hover .el-icon-close {
+  visibility: visible;
+}
+
+.index-box .el-tabs__item:hover {
+  color: #409eff;
+}
+
+.el-tabs__active-bar {
+  left: -5px;
+}

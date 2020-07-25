@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavaScriptSettings">
+    <option name="languageLevel" value="ES6" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/az_shop_parent/pom.xml" />
+        <option value="$PROJECT_DIR$/az_shop_parent/az_eureka/pom.xml" />
+        <option value="$PROJECT_DIR$/az_shop_parent/az_zuul/pom.xml" />
+        <option value="$PROJECT_DIR$/az_shop_parent/speckill_shop_api/pom.xml" />
+        <option value="F:/codeGen2/pom.xml" />
+        <option value="$PROJECT_DIR$/az_shop_parent/seckill_shop_sso/pom.xml" />
+        <option value="$PROJECT_DIR$/az_shop_parent/speckill_pay_api/pom.xml" />
+        <option value="$PROJECT_DIR$/test_queue/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <script src="../static/js/plugins/vue/vue.min.js"></script>
+    <script src="../static/js/plugins/vue/axios.min.js"></script>
+    <script src="../static/js/plugins/vue/qs.js"></script>
+    <link rel="stylesheet" href="../static/js/plugins/elementUI/index.css">
+    <script src="../static/js/plugins/elementUI/index.js"></script>
+    <script src="../static/js/plugins/jquery/jquery-3.2.1.min.js"></script>
+    <script src="../static/js/plugins/jquery/jquery.cookie.js"></script>
+</head>
+<body>
+
+<div id="app">
+
+<h1 align="center">登录</h1>
+
+    <div align="center" style="width: 55%;margin-left: 300px">
+        <el-form align="center" :model="loginForm">
+
+            <el-form-item prop="username">
+                账号：<el-input v-model="loginForm.username"
+                     style="width: 300px" placeholder="请输入用户名"></el-input>
+            </el-form-item>
+
+            <el-form-item  prop="password">
+                密码：<el-input v-model="loginForm.password"
+                     style="width: 300px" placeholder="请输入密码"></el-input>
+            </el-form-item>
+
+            <el-form-item >
+                <el-button @click="doLogin">登录</el-button>
+            </el-form-item>
+        </el-form>
+    </div>
+
+</div>
+
+
+<script>
+    var baseUrl = "http://localhost:10010/api/item/";
+    var loginUrl = "http://localhost:10010/api/sso/";
+    var app = new Vue({
+        el:"#app",
+        data:{
+            // 登录提交表单
+            loginForm:{},
+        },
+        methods: {
+            // 登录
+            doLogin:function () {
+                axios.post(loginUrl + "user/login",app.loginForm).then(function (value) {
+                    if(value.data.success){
+                        $.cookie('USER_TOKEN',value.data.token,{
+                            expires:1,  // 设置cookie存在时间，以天为单位
+                            path:'/',   // 设置路径，以"/"所有的路径都可用该cookie
+                            //domain:'seckill.com' // 设置顶级域名
+                        });
+                        location.href = "seckill-index.html";
+                    } else{
+                        alert("账号或密码错误")
+                    }
+                })
+            }
+        }
+    })
+</script>
+
+
+
+</body>
+</html>

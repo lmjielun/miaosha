@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="az_eureka" />
+        <module name="az_zuul" />
+        <module name="codeGen2" />
+        <module name="seckill_shop_sso" />
+        <module name="speckill_pay_api" />
+        <module name="speckill_shop_api" />
+        <module name="speckill_shop_pojo" />
+        <module name="test_queue" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="az_eureka" target="1.8" />
+      <module name="az_shop_parent" target="1.8" />
+      <module name="az_zuul" target="1.8" />
+      <module name="codeGen2" target="1.5" />
+      <module name="seckill_shop_sso" target="1.8" />
+      <module name="speckill_pay_api" target="1.8" />
+      <module name="speckill_shop_api" target="1.8" />
+      <module name="speckill_shop_pojo" target="1.8" />
+      <module name="test_queue" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

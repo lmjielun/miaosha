@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/az_shop_parent/az_eureka/az_eureka.iml" filepath="$PROJECT_DIR$/az_shop_parent/az_eureka/az_eureka.iml" />
+      <module fileurl="file://$PROJECT_DIR$/az_shop_parent/az_shop_parent.iml" filepath="$PROJECT_DIR$/az_shop_parent/az_shop_parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/az_shop_parent/az_zuul/az_zuul.iml" filepath="$PROJECT_DIR$/az_shop_parent/az_zuul/az_zuul.iml" />
+      <module fileurl="file://F:/codeGen2/codeGen2.iml" filepath="F:/codeGen2/codeGen2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/az_shop_parent/seckill_shop_sso/seckill_shop_sso.iml" filepath="$PROJECT_DIR$/az_shop_parent/seckill_shop_sso/seckill_shop_sso.iml" />
+      <module fileurl="file://$PROJECT_DIR$/seckill_ui/seckill_ui.iml" filepath="$PROJECT_DIR$/seckill_ui/seckill_ui.iml" />
+      <module fileurl="file://$PROJECT_DIR$/az_shop_parent/speckill_pay_api/speckill_pay_api.iml" filepath="$PROJECT_DIR$/az_shop_parent/speckill_pay_api/speckill_pay_api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/az_shop_parent/speckill_shop_api/speckill_shop_api.iml" filepath="$PROJECT_DIR$/az_shop_parent/speckill_shop_api/speckill_shop_api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/az_shop_parent/speckill_shop_pojo/speckill_shop_pojo.iml" filepath="$PROJECT_DIR$/az_shop_parent/speckill_shop_pojo/speckill_shop_pojo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test_queue/test_queue.iml" filepath="$PROJECT_DIR$/test_queue/test_queue.iml" />
+    </modules>
+  </component>
+</project>
