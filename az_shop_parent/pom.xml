@@ -42,7 +42,7 @@
 		<!--druid数据源版本设置-->
 		<druid.version>1.1.14</druid.version>
 		<!--mysql版本设置-->
-		<mysql.version>5.1.47</mysql.version>
+		<mysql.version>8.0.28</mysql.version>
 		<!--分页插件设置-->
 		<pageHelper.starter.version>1.2.3</pageHelper.starter.version>
 		<!--不知道是什么，应该是监听-->
